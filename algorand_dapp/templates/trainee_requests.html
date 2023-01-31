@@ -1,0 +1,52 @@
+
+{% block content %}
+<br>
+    <h1>{% block title %} Trainee Requests {% endblock %}</h1>
+    <br>
+    <nav>
+      <a href="{{ url_for('admin_account') }}">Create Account</a> |
+      <a href="{{ url_for('create_nft') }}">Create NFT</a> |
+      <a href="{{ url_for('trainee_requests') }}">Trainee Requests</a> |
+      </nav>
+    <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">Asset Id</th>
+                  <th scope="col">TxID</th>
+                  <th scope="col">Trainee Name</th>
+                  <th scope="col">Unit Name</th>
+                  <th scope="col">Asset Name</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {%for each in data%}
+                <tr>
+                  <th scope="row">1</th>
+                  <td>{{each.asset_id}}</td>
+                  <td>{{each.txId}}</td>
+                  <td>{{each.trainee_name}}</td>
+                  <td>{{each.unit_name}}</td>
+                  <td>{{each.asset_name}}</td>
+                  <td>{{each.status}}</td>
+                  <td>
+                    <form method="post" action="/transfer_asset">
+                        <input type="hidden" id="asset_id" name="asset_id" value={{each.asset_id}}>
+                        <input type="hidden" id="public_key" name="public_key" value={{each.public_key}}>
+                        <input type="hidden" id="receiver_public_key" name="receiver_public_key" value={{each.receiver_public_key}}>
+                        <input type="submit" value="approved" name="action1"/>
+                        <input type="submit" value="declined" name="action2" />
+                    </form>
+                  </td>
+                </tr>
+                {%endfor%}
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+{% endblock %}
