@@ -1,0 +1,4 @@
+pyteal
+flask
+py-algorand-sdk
+pytest
